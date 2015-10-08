@@ -7,7 +7,7 @@ var app = app || {};
 	// Todo Model
 	// ----------
 
-	// Our basic **Todo** model has `title`, `order`, and `completed` attributes.
+	// Our basic **Todo** model has `title`, `order`, `completed`, and 'priority' attributes.
 	app.Todo = Backbone.Model.extend({
 		// Default attributes for the todo
 		// and ensure that each todo created has `title` and `completed` keys.

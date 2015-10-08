@@ -63,10 +63,15 @@ var app = app || {};
 		},
 
 		isHidden: function () {
-			return this.model.get('completed') ?
-				app.TodoFilter === 'active' :
-				app.TodoFilter === 'completed';
+			var completed =  this.model.get('completed') ?
+											  app.TodoFilter === 'active' :
+												app.TodoFilter === 'completed';
+			var priority =
+				(!(this.model.get('priority')) && (app.TodoFilter ==='priority')) ? true : false;
+
+			return (completed || priority);
 		},
+
 
 		// Toggle the "priority" state of the model.
 		togglePriority: function() {
@@ -75,11 +80,6 @@ var app = app || {};
 		// Toggle the `"completed"` state of the model.
 		toggleCompleted: function () {
 			this.model.toggle();
-		},
-
-		priority: function() {
-			var el = this.$el;
-			el.hasClass('priority') ? el.removeClass('priority') : el.addClass('priority')
 		},
 
 		// Switch this view into `"editing"` mode, displaying the input field.
