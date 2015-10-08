@@ -223,6 +223,7 @@ label[for='toggle-all'] {
 	appearance: none;
 }
 
+#new-todo-title .priority-btn,
 #todo-list li .priority-btn {
 	display: none;
 	height: auto;
@@ -242,10 +243,12 @@ label[for='toggle-all'] {
 	appearance: none;
 }
 
+#new-todo-title:hover .priority-btn,
 #todo-list li:hover .priority-btn {
 	display: block;
 }
 
+#new-todo-title .priority-btn:after,
 #todo-list li .priority-btn:after {
 	content: '!';
 }
@@ -282,11 +285,19 @@ label[for='toggle-all'] {
 	text-decoration: line-through;
 }
 
+#new-todo-title.priority input {
+	color: #d66;
+}
+
 #todo-list li.priority:not(.completed) label {
 	color: #d66;
 }
 
 #todo-list li.priority .priority-btn:after {
+	color: #d66;
+}
+
+#new-todo-title.priority .priority-btn:after {
 	color: #d66;
 }
 

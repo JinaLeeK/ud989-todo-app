@@ -21,7 +21,8 @@ var app = app || {};
 		events: {
 			'keypress #new-todo': 'createOnEnter',
 			'click #clear-completed': 'clearCompleted',
-			'click #toggle-all': 'toggleAllComplete'
+			'click #toggle-all': 'toggleAllComplete',
+			'click .priority-btn': 'togglePriority'
 		},
 
 		// At initialization we bind to the relevant events on the `Todos`
@@ -33,6 +34,7 @@ var app = app || {};
 			this.$footer = this.$('#footer');
 			this.$main = this.$('#main');
 			this.$list = $('#todo-list');
+			this.$title = $('#new-todo-title');
 
 			this.listenTo(app.todos, 'add', this.addOne);
 			this.listenTo(app.todos, 'reset', this.addAll);
@@ -86,6 +88,10 @@ var app = app || {};
 			app.todos.each(this.addOne, this);
 		},
 
+		togglePriority: function() {
+			this.$title.toggleClass('priority', !this.$title.hasClass('priority'));
+		},
+
 		filterOne: function (todo) {
 			todo.trigger('visible');
 		},
@@ -99,7 +105,8 @@ var app = app || {};
 			return {
 				title: this.$input.val().trim(),
 				order: app.todos.nextOrder(),
-				completed: false
+				completed: false,
+				priority: this.$title.hasClass('priority')
 			};
 		},
 
@@ -109,6 +116,7 @@ var app = app || {};
 			if (e.which === ENTER_KEY && this.$input.val().trim()) {
 				app.todos.create(this.newAttributes());
 				this.$input.val('');
+				this.$title.removeClass('priority');
 			}
 		},
 
