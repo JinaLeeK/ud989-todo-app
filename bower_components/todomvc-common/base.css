@@ -114,7 +114,7 @@ input[type="checkbox"] {
 .edit {
 	position: relative;
 	margin: 0;
-	width: 100%;
+	/*width: 100%;*/
 	font-size: 24px;
 	font-family: inherit;
 	line-height: 1.4em;
@@ -136,7 +136,9 @@ input[type="checkbox"] {
 }
 
 #new-todo {
-	padding: 16px 16px 16px 60px;
+	padding: 16px 60px 16px 16px;
+	margin-left: 45px;
+	width: 450px;
 	border: none;
 	background: rgba(0, 0, 0, 0.02);
 	z-index: 2;
@@ -223,7 +225,26 @@ label[for='toggle-all'] {
 	appearance: none;
 }
 
-#new-todo-title .priority-btn,
+#new-todo-title .priority-btn {
+	display: none;
+	height: auto;
+	position: relative;
+	height: auto;
+	top: 0;
+	bottom: 0;
+	left: 36px;
+	padding: 0 4px;
+	background-color: #fcfcfc;
+	/*color: #d00;*/
+	z-index: 10;
+	/* Mobile Safari */
+	border: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
 #todo-list li .priority-btn {
 	display: none;
 	height: auto;
@@ -243,7 +264,10 @@ label[for='toggle-all'] {
 	appearance: none;
 }
 
-#new-todo-title:hover .priority-btn,
+#new-todo-title:hover .priority-btn{
+	display: inline;
+}
+
 #todo-list li:hover .priority-btn {
 	display: block;
 }
