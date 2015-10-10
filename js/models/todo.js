@@ -14,7 +14,14 @@ var app = app || {};
 		defaults: {
 			title: '',
 			completed: false,
-			priority: false
+			priority: false,
+			deleted: false
+		},
+
+		saveDeleted: function () {
+			this.save({
+				deleted: true
+			});
 		},
 
 		togglePriority: function () {

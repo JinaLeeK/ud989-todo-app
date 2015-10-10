@@ -53,6 +53,7 @@ var app = app || {};
 			this.$el.html(this.template(this.model.toJSON()));
 			this.$el.toggleClass('completed', this.model.get('completed'));
 			this.$el.toggleClass('priority', this.model.get('priority'));
+			this.$el.toggleClass('deleted', this.model.get('deleted'));
 			this.toggleVisible();
 			this.$input = this.$('.edit');
 			return this;
@@ -63,13 +64,37 @@ var app = app || {};
 		},
 
 		isHidden: function () {
-			var completed =  this.model.get('completed') ?
-											  app.TodoFilter === 'active' :
-												app.TodoFilter === 'completed';
-			var priority =
-				(!(this.model.get('priority')) && (app.TodoFilter ==='priority')) ? true : false;
 
-			return (completed || priority);
+			if (app.TodoFilter === 'deleted') {
+				return this.model.get('deleted') ? false : true;
+			}
+
+			var deleted = this.model.get('deleted') ? true : false;
+
+			var completed = this.model.get('completed') ?
+											app.TodoFilter === 'active' :
+											app.TodoFilter === 'completed';
+
+			var priority = (app.TodoFilter === 'priority') && !(this.model.get('priority')) ? true : false;
+
+			return deleted || completed || priority;
+			// if (!app.TodoFilter === 'deleted') {
+			// 	var completed =  this.model.get('completed') ?
+			// 									  app.TodoFilter === 'active' :
+			// 										app.TodoFilter === 'completed';
+			// 	var priority =
+			// 		(!(this.model.get('priority')) && (app.TodoFilter ==='priority')) ? true : false;
+			//
+			// 	var deleted =
+			// 		(this.model.get('deleted')) ? true: false;
+			//
+			// 	return false;
+			// 	// return compeleted || priority || deleted;
+			//
+			// } else {
+			// 	return this.model.get('priority') ? false: true;
+			// }
+
 		},
 
 
@@ -138,7 +163,8 @@ var app = app || {};
 
 		// Remove the item, destroy the model from *localStorage* and delete its view.
 		clear: function () {
-			this.model.destroy();
+			this.model.saveDeleted();
+			// this.model.destroy();
 		}
 	});
 })(jQuery);

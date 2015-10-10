@@ -23,12 +23,16 @@ var app = app || {};
 
 		// Filter down the list to only todo items that are still not finished.
 		remaining: function () {
-			return this.where({completed: false});
+			return this.where({completed: false}) && this.where({deleted: false});
 		},
 
 		// Filter down the list to only todo items that have priority.
 		priority: function () {
 			return this.where({priority: true});
+		},
+
+		deleted: function () {
+			return this.where({deleted: true});
 		},
 
 		// We keep the Todos in sequential order, despite being saved by unordered

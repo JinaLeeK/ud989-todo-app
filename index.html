@@ -55,6 +55,11 @@
 				<li>
 					<a href="#/priority">Priority</a>
 				</li>
+				<% if (deleted) { %>
+				<li>
+					<a href="#/deleted">Deleted(<%= deleted %>)</a>
+				</li>
+				<% } %>
 			</ul>
 			<% if (completed) { %>
 			<button id="clear-completed">Clear completed (<%= completed %>)</button>
